@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Data;
 using System.Web.Http; 
 
 namespace WebAPI.Controllers
 {
-    public class ValuesController : ApiController
+    public class CpController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public DataTable Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = DataAccess.DataTable("select * from cp");
+            return result; 
         }
 
         // GET api/values/5
         public DataTable Get(int id)
         {
-            var result =  DataAccess.DataTable("select * from xwlb");
+            var result =  DataAccess.DataTable("select * from cp where id ="+id);
             return result;
         }
 
