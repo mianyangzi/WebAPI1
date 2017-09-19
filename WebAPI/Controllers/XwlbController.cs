@@ -6,16 +6,18 @@ namespace WebAPI.Controllers
     public class XwlbController : ApiController
     {
         // GET api/values
-        public DataTable Get()
+        public DataSet Get()
         {
-            var result = DataAccess.DataTable("select * from xwlb");
+            var result = DataAccess.DataSet("select * from xwlb");
+            result.Tables[0].TableName = "xwlb";
             return result; 
         }
 
         // GET api/values/5
-        public DataTable Get(int id)
+        public DataSet Get(int id)
         {
-            var result =  DataAccess.DataTable("select * from xwlb where id =" + id);
+            var result =  DataAccess.DataSet("select * from xwlb where id =" + id);
+            result.Tables[0].TableName = "xwlb";
             return result;
         }
 

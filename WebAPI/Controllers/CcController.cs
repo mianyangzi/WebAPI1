@@ -6,16 +6,18 @@ namespace WebAPI.Controllers
     public class CcController : ApiController
     {
         // GET api/values
-        public DataTable Get()
+        public DataSet Get()
         {
-            var result = DataAccess.DataTable("select * from cc");
+            var result = DataAccess.DataSet("select * from cc");
+            result.Tables[0].TableName = "cc";
             return result; 
         }
 
         // GET api/values/5
-        public DataTable Get(int id)
+        public DataSet Get(int id)
         {
-            var result =  DataAccess.DataTable("select * from cc where id =" + id);
+            var result =  DataAccess.DataSet("select * from cc where id =" + id);
+            result.Tables[0].TableName = "cc";
             return result;
         }
 

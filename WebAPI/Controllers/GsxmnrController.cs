@@ -6,16 +6,18 @@ namespace WebAPI.Controllers
     public class GsxmnrController : ApiController
     {
         // GET api/values
-        public DataTable Get()
+        public DataSet Get()
         {
-            var result = DataAccess.DataTable("select * from gsxmnr");
+            var result = DataAccess.DataSet("select * from gsxmnr");
+            result.Tables[0].TableName = "gsxmnr";
             return result; 
         }
 
         // GET api/values/5
-        public DataTable Get(int id)
+        public DataSet Get(int id)
         {
-            var result =  DataAccess.DataTable("select * from gsxmnr where id =" + id);
+            var result =  DataAccess.DataSet("select * from gsxmnr where id =" + id);
+            result.Tables[0].TableName = "gsxmnr";
             return result;
         }
 

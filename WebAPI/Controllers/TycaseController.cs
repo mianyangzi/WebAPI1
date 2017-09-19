@@ -6,16 +6,18 @@ namespace WebAPI.Controllers
     public class TycaseController : ApiController
     {
         // GET api/values
-        public DataTable Get()
+        public DataSet Get()
         {
-            var result = DataAccess.DataTable("select * from tycase");
+            var result = DataAccess.DataSet("select * from tycase");
+            result.Tables[0].TableName = "tycase";
             return result; 
         }
 
         // GET api/values/5
-        public DataTable Get(int id)
+        public DataSet Get(int id)
         {
-            var result =  DataAccess.DataTable("select * from tycase where id =" + id);
+            var result =  DataAccess.DataSet("select * from tycase where id =" + id);
+            result.Tables[0].TableName = "tycase";
             return result;
         }
 

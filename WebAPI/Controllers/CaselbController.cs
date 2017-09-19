@@ -6,16 +6,18 @@ namespace WebAPI.Controllers
     public class CaselbController : ApiController
     {
         // GET api/values
-        public DataTable Get()
+        public DataSet Get()
         {
-            var result = DataAccess.DataTable("select * from caselb");
+            var result = DataAccess.DataSet("select * from caselb");
+            result.Tables[0].TableName = "caselb";
             return result; 
         }
 
         // GET api/values/5
-        public DataTable Get(int id)
+        public DataSet Get(int id)
         {
-            var result =  DataAccess.DataTable("select * from caselb where id =" + id);
+            var result =  DataAccess.DataSet("select * from caselb where id =" + id);
+            result.Tables[0].TableName = "caselb";
             return result;
         }
 
