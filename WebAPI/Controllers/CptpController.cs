@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Data;
 using System.Web.Http; 
 
 namespace WebAPI.Controllers
 {
-    public class ValuesController : ApiController
+    public class CptpController : ApiController
     {
         // GET api/values
-        public IEnumerable<string> Get()
+        public DataSet Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = DataAccess.DataSet("select * from cptp");
+            result.Tables[0].TableName = "ppt";
+            return result; 
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public DataSet Get(int id)
         {
-             
-            return "value";
+            var result =  DataAccess.DataSet("select * from cptp where id =" + id);
+            result.Tables[0].TableName = "ppt";
+            return result;
         }
 
         // POST api/values

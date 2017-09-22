@@ -182,6 +182,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CptpController.cs" />
     <Compile Include="Controllers\PptController.cs" />
     <Compile Include="Controllers\SortController.cs" />
     <Compile Include="Controllers\CaselbController.cs" />
