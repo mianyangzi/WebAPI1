@@ -7,7 +7,7 @@ namespace WebAPI.Controllers
     public class CpController : ApiController
     {
         // GET api/values
-        public DataSet Get(string s4="")
+        public DataSet getbys4(string s4="")
         {
             var sqlstr = "select * from cp order by px desc,id desc";
             if (!string.IsNullOrEmpty(s4))
@@ -15,15 +15,29 @@ namespace WebAPI.Controllers
                 sqlstr = "select * from cp where s4 = '" + s4 + "' order by px desc,id desc";
             }
             var result = DataAccess.DataSet(sqlstr);
-
-
-
-
-
+            
             result.Tables[0].TableName = "cp";
 
             return result; 
         }
+
+
+        // GET api/values
+        public DataSet getbys1(string s1 = "")
+        {
+            var sqlstr = "select * from cp order by px desc,id desc";
+            if (!string.IsNullOrEmpty(s1))
+            {
+                sqlstr = "select * from cp where s1  like '%" + s1 + "%' order by px desc,id desc";
+            }
+            var result = DataAccess.DataSet(sqlstr);
+
+            result.Tables[0].TableName = "cp";
+
+            return result;
+        }
+
+
 
         // GET api/values
         public DataSet getbysort_id(int sort_id)
@@ -33,8 +47,20 @@ namespace WebAPI.Controllers
             result.Tables[0].TableName = "cp";
             return result;
         }
+
+        // GET api/values
+        public DataSet getbynsort_id(int nsort_id)
+        {
+            var sqlstr = "select * from cp where nsort_id = " + nsort_id + " order by px desc,id desc";
+            var result = DataAccess.DataSet(sqlstr);
+            result.Tables[0].TableName = "cp";
+            return result;
+        }
+
+
+
         // GET api/values/5
-        public DataSet Get(int id)
+        public DataSet GetbyId(int id)
         {
             var result =  DataAccess.DataSet("select * from cp where id ="+id);
             result.Tables[0].TableName = "cp";
