@@ -136,14 +136,14 @@ namespace WebAPI
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 da.SelectCommand = Comm;
-                da.Fill(ds);
+                da.Fill(ds); 
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
             finally
-            {
+            { 
                 CloseConnection();
             }
             return ds;

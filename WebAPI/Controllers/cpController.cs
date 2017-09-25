@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Web.Http; 
 
 namespace WebAPI.Controllers
@@ -6,9 +7,14 @@ namespace WebAPI.Controllers
     public class CpController : ApiController
     {
         // GET api/values
-        public DataSet Get()
+        public DataSet Get(string s4="")
         {
-            var result = DataAccess.DataSet("select * from cp");
+            var sqlstr = "select * from cp order by px desc,id desc";
+            if (!string.IsNullOrEmpty(s4))
+            {
+                sqlstr = "select * from cp where s4 = '"+s4+"' order by px desc,id desc";
+            }
+            var result = DataAccess.DataSet(sqlstr);
             result.Tables[0].TableName = "cp";
             return result; 
         }

@@ -3,21 +3,21 @@ using System.Web.Http;
 
 namespace WebAPI.Controllers
 {
-    public class CaselbController : ApiController
+    public class TyhonorController : ApiController
     {
         // GET api/values
         public DataSet Get()
         {
-            var result = DataAccess.DataSet("select * from caselb order by px desc,id desc");
-            result.Tables[0].TableName = "caselb";
+            var result = DataAccess.DataSet("select * from tyhonor order by px desc,id desc");
+            result.Tables[0].TableName = "tyhonor";
             return result; 
         }
 
         // GET api/values/5
         public DataSet Get(int id)
         {
-            var result =  DataAccess.DataSet("select * from caselb where id =" + id);
-            result.Tables[0].TableName = "caselb";
+            var result =  DataAccess.DataSet("select * from tyhonor where id =" + id);
+            result.Tables[0].TableName = "tyhonor";
             return result;
         }
 

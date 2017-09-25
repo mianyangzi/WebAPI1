@@ -186,6 +186,7 @@
     <Compile Include="Controllers\PptController.cs" />
     <Compile Include="Controllers\SortController.cs" />
     <Compile Include="Controllers\CaselbController.cs" />
+    <Compile Include="Controllers\TyhonorController.cs" />
     <Compile Include="Controllers\TycaseController.cs" />
     <Compile Include="Controllers\CcController.cs" />
     <Compile Include="Controllers\XwlbController.cs" />
