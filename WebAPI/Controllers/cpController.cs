@@ -12,25 +12,18 @@ namespace WebAPI.Controllers
             var sqlstr = "select * from cp order by px desc,id desc";
             if (!string.IsNullOrEmpty(s4))
             {
-                sqlstr = "select * from cp where s4 = '"+s4+"' order by px desc,id desc";
+                sqlstr = "select * from cp where s4 = '" + s4 + "' order by px desc,id desc";
             }
             var result = DataAccess.DataSet(sqlstr);
+
+
+
+
+
             result.Tables[0].TableName = "cp";
 
             return result; 
         }
-
-
-
-        // GET api/values
-        public DataSet getbysort_id(int sort_id)
-        {
-            var sqlstr = "select * from cp where sort_id = " + sort_id + " order by px desc,id desc";
-            var result = DataAccess.DataSet(sqlstr);
-            result.Tables[0].TableName = "cp";
-            return result;
-        }
-
 
         // GET api/values/5
         public DataSet Get(int id)

@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
         // GET api/values
         public DataSet Get()
         {
-            var result = DataAccess.DataSet("select * from tyhonor order by px desc,id desc");
+            DataSet result = DataAccess.DataSet("select * from tyhonor order by px desc,id desc");
             result.Tables[0].TableName = "tyhonor";
             return result; 
         }
