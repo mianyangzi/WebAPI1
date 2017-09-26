@@ -14,9 +14,9 @@ namespace WebAPI.Controllers
         }
 
         // GET api/values/5
-        public DataSet Get(int id)
+        public DataSet GetbyNsort_id(int nsort_id)
         {
-            var result =  DataAccess.DataSet("select * from nsort where id =" + id);
+            var result =  DataAccess.DataSet("select * from nsort where nsort_id =" + nsort_id);
             result.Tables[0].TableName = "nsort";
             return result;
         }

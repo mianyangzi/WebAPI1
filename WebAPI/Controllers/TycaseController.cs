@@ -13,8 +13,18 @@ namespace WebAPI.Controllers
             return result; 
         }
 
+
+        // GET api/values
+        public DataSet GetbyLb_id(int lb_id)
+        {
+            var sqlstr = "select * from tycase where lb_id = " + lb_id + " order by px desc,id desc";
+            var result = DataAccess.DataSet(sqlstr);
+            result.Tables[0].TableName = "tycase";
+            return result;
+        }
+
         // GET api/values/5
-        public DataSet Get(int id)
+        public DataSet GetbyId(int id)
         {
             var result =  DataAccess.DataSet("select * from tycase where id =" + id);
             result.Tables[0].TableName = "tycase";

@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         }
 
         // GET api/values/5
-        public DataSet Get(int id)
+        public DataSet GetbyId(int id)
         {
             var result =  DataAccess.DataSet("select * from cptp where id =" + id);
             result.Tables[0].TableName = "ppt";

@@ -13,8 +13,20 @@ namespace WebAPI.Controllers
             return result; 
         }
 
+
+        // GET api/values
+        public DataSet GetbyXwlb_id(int xwlb_id)
+        {
+            var sqlstr = "select * from xw where xwlb_id = " + xwlb_id + " order by shijian desc,id desc";
+            var result = DataAccess.DataSet(sqlstr);
+            result.Tables[0].TableName = "xw";
+            return result;
+        }
+
+
+
         // GET api/values/5
-        public DataSet Get(int id)
+        public DataSet GetbyId(int id)
         {
             var result =  DataAccess.DataSet("select * from xw where id =" + id);
             result.Tables[0].TableName = "xw";

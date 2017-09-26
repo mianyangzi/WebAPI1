@@ -6,8 +6,19 @@ namespace WebAPI.Controllers
 {
     public class CpController : ApiController
     {
+
         // GET api/values
-        public DataSet getbys4(string s4="")
+        public DataSet Get()
+        {
+            var result = DataAccess.DataSet("select * from cp order by px desc,id desc");
+            result.Tables[0].TableName = "cp";
+            return result;
+        }
+
+
+
+        // GET api/values
+        public DataSet Getbys4(string s4="")
         {
             var sqlstr = "select * from cp order by px desc,id desc";
             if (!string.IsNullOrEmpty(s4))
@@ -23,7 +34,7 @@ namespace WebAPI.Controllers
 
 
         // GET api/values
-        public DataSet getbys1(string s1 = "")
+        public DataSet Getbys1(string s1 = "")
         {
             var sqlstr = "select * from cp order by px desc,id desc";
             if (!string.IsNullOrEmpty(s1))
@@ -40,7 +51,7 @@ namespace WebAPI.Controllers
 
 
         // GET api/values
-        public DataSet getbysort_id(int sort_id)
+        public DataSet Getbysort_id(int sort_id)
         {
             var sqlstr = "select * from cp where sort_id = " + sort_id + " order by px desc,id desc";
             var result = DataAccess.DataSet(sqlstr);
@@ -49,7 +60,7 @@ namespace WebAPI.Controllers
         }
 
         // GET api/values
-        public DataSet getbynsort_id(int nsort_id)
+        public DataSet Getbynsort_id(int nsort_id)
         {
             var sqlstr = "select * from cp where nsort_id = " + nsort_id + " order by px desc,id desc";
             var result = DataAccess.DataSet(sqlstr);
