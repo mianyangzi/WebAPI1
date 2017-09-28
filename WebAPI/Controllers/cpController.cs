@@ -36,10 +36,10 @@ namespace WebAPI.Controllers
         // GET api/values
         public DataSet Getbys1(string s1 = "")
         {
-            var sqlstr = "select * from cp order by px desc,id desc";
+            var sqlstr = "select cp.*,sort.sort_name from cp left join sort  on cp.sort_id = sort.sort_id order by cp.px desc,cp.id desc";
             if (!string.IsNullOrEmpty(s1))
             {
-                sqlstr = "select * from cp where s1  like '%" + s1 + "%' order by px desc,id desc";
+                sqlstr = "select cp.*,sort.sort_name from cp left join sort  on cp.sort_id = sort.sort_id  where cp.s1  like '%" + s1 + "%' order by cp.px desc,cp.id desc";
             }
             var result = DataAccess.DataSet(sqlstr);
 
