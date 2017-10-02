@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
         // GET api/values
         public DataSet Get()
         {
-            var result = DataAccess.DataSet("select * from xwlb");
+            var result = DataAccess.DataSet("select * from xwlb", this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "xwlb";
             return result; 
         }
@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         // GET api/values/5
         public DataSet GetbyId(int id)
         {
-            var result =  DataAccess.DataSet("select * from xwlb where id =" + id);
+            var result =  DataAccess.DataSet("select * from xwlb where id =" + id, this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "xwlb";
             return result;
         }

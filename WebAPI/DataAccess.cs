@@ -2,6 +2,7 @@
 using System.Data;
 using System.Configuration;
 using System.Data.OleDb;
+
 namespace WebAPI
 {
     /**//// <summary>
@@ -10,16 +11,26 @@ namespace WebAPI
     public class DataAccess
     {
         protected static OleDbConnection Conn = new OleDbConnection();
-        protected static OleDbCommand Comm = new OleDbCommand();
-
+        protected static OleDbCommand Comm = new OleDbCommand();  
         /**//// <summary>
         /// 打开数据库
         /// </summary>
-        private static void OpenConnection()
+        private static void OpenConnection(string dbname)
         {
             if (Conn.State == ConnectionState.Closed)
-            {
-                Conn.ConnectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=" + ConfigurationManager.AppSettings["myconn"];//web.config文件里设定。            
+            { 
+                switch (dbname)
+                {
+                    case "api/":
+                    Conn.ConnectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=" + ConfigurationManager.AppSettings["myconn1"];//web.config文件里设定。   
+                        break;
+                    case "api2/":
+                        Conn.ConnectionString = @"Provider=Microsoft.Jet.OleDb.4.0;Data Source=" + ConfigurationManager.AppSettings["myconn2"];//web.config文件里设定。   
+                        break;
+                }
+                ;
+
+
                 Comm.Connection = Conn;
                 try
                 {
@@ -45,11 +56,11 @@ namespace WebAPI
         /// 执行sql语句
         /// </summary>
         /// <param name="sqlstr"></param>
-        public static void ExcuteSql(string sqlstr)
+        public static void ExcuteSql(string sqlstr, string dbname)
         {
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 Comm.ExecuteNonQuery();
@@ -66,12 +77,12 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <returns></returns>
-        public static OleDbDataReader DataReader(string sqlstr)
+        public static OleDbDataReader DataReader(string sqlstr, string dbname)
         {
             OleDbDataReader dr = null;
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandText = sqlstr;
                 Comm.CommandType = CommandType.Text;
                 dr = Comm.ExecuteReader(CommandBehavior.CloseConnection);
@@ -95,11 +106,11 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <param name="dr"></param>
-        public static void DataReader(string sqlstr, ref OleDbDataReader dr)
+        public static void DataReader(string sqlstr, ref OleDbDataReader dr, string dbname)
         {
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandText = sqlstr;
                 Comm.CommandType = CommandType.Text;
                 dr = Comm.ExecuteReader(CommandBehavior.CloseConnection);
@@ -126,13 +137,13 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <returns></returns>
-        public static DataSet DataSet(string sqlstr)
+        public static DataSet DataSet(string sqlstr, string dbname)
         {
             DataSet ds = new DataSet();
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 da.SelectCommand = Comm;
@@ -153,12 +164,12 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <param name="ds"></param>
-        public static void DataSet(string sqlstr, ref DataSet ds)
+        public static void DataSet(string sqlstr, ref DataSet ds, string dbname)
         {
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 da.SelectCommand = Comm;
@@ -178,13 +189,13 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <returns></returns>
-        public static DataTable DataTable(string sqlstr)
+        public static DataTable DataTable(string sqlstr, string dbname)
         {
             DataTable dt = new DataTable();
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 da.SelectCommand = Comm;
@@ -205,12 +216,12 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <param name="dt"></param>
-        public static void DataTable(string sqlstr, ref DataTable dt)
+        public static void DataTable(string sqlstr, ref DataTable dt, string dbname)
         {
             OleDbDataAdapter da = new OleDbDataAdapter();
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 da.SelectCommand = Comm;
@@ -230,14 +241,14 @@ namespace WebAPI
         /// </summary>
         /// <param name="sqlstr"></param>
         /// <returns></returns>
-        public static DataView DataView(string sqlstr)
+        public static DataView DataView(string sqlstr, string dbname)
         {
             OleDbDataAdapter da = new OleDbDataAdapter();
             DataView dv;
             DataSet ds = new DataSet();
             try
             {
-                OpenConnection();
+                OpenConnection(dbname);
                 Comm.CommandType = CommandType.Text;
                 Comm.CommandText = sqlstr;
                 da.SelectCommand = Comm;

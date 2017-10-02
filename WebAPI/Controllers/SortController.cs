@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
                 }
             }
 
-            var result = DataAccess.DataSet(sqlstr);
+            var result = DataAccess.DataSet(sqlstr, this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "sort";
             return result;
         }
@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
         // GET api/values/5
         public DataSet GetbySort_id(int sort_id)
         {
-            var result = DataAccess.DataSet("select * from sort where sort_id =" + sort_id);
+            var result = DataAccess.DataSet("select * from sort where sort_id =" + sort_id, this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "sort";
             return result;
         }

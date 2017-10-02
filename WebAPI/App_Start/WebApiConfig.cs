@@ -20,6 +20,11 @@ namespace WebAPI
                 "api/{controller}/{action}/{id}",
                 new { id = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+                "DefaultApi2",
+                "api2/{controller}/{action}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             //GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             ////默认返回 json  

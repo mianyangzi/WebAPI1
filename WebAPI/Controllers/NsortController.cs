@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
         // GET api/values
         public DataSet Get()
         {
-            var result = DataAccess.DataSet("select * from nsort");
+            var result = DataAccess.DataSet("select * from nsort", this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "nsort";
             return result; 
         }
@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
         // GET api/values/5
         public DataSet GetbyNsort_id(int nsort_id)
         {
-            var result =  DataAccess.DataSet("select * from nsort where nsort_id =" + nsort_id);
+            var result =  DataAccess.DataSet("select * from nsort where nsort_id =" + nsort_id, this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "nsort";
             return result;
         }
