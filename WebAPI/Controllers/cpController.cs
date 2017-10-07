@@ -36,10 +36,10 @@ namespace WebAPI.Controllers
         // GET api/values
         public DataSet Getbys1(string s1 = "")
         {
-            var sqlstr = "select cp.*,sort.sort_name from cp left join sort  on cp.sort_id = sort.sort_id order by cp.px desc,cp.id desc";
+            var sqlstr = "select cp.*,sort.sort_name from ((cp left join cp_sort on  cp.id = cp_sort.cp_id) left join sort  on cp_sort.sort_id = sort.sort_id )order by cp.px desc,cp.id desc";
             if (!string.IsNullOrEmpty(s1))
             {
-                sqlstr = "select cp.*,sort.sort_name from cp left join sort  on cp.sort_id = sort.sort_id  where cp.s1  like '%" + s1 + "%' order by cp.px desc,cp.id desc";
+                sqlstr = "select cp.*,sort.sort_name from ((cp left join cp_sort on  cp.id = cp_sort.cp_id) left join sort  on cp_sort.sort_id = sort.sort_id)  where cp.s1  like '%" + s1 + "%' order by cp.px desc,cp.id desc";
             }
             var result = DataAccess.DataSet(sqlstr, this.Url.Request.RequestUri.Segments[1]);
 
@@ -51,13 +51,13 @@ namespace WebAPI.Controllers
 
 
         // GET api/values
-        public DataSet Getbysort_id(string sort_id = "")
+        public DataSet Getbysort_id(int sort_id)
         {
-            var sqlstr = "select * from cp order by px desc,id desc";
-            if (!string.IsNullOrEmpty(sort_id))
-            {
-                sqlstr = "select * from cp where  sort_id like '%%," + sort_id + ",%%' order by px desc,id desc";
-            }
+            //var sqlstr = "select * from cp where sort_id = " + sort_id + " order by px desc,id desc";
+            //if (sort_id==0)
+            //{
+               var sqlstr = "select cp.*,cp_sort.cp_id,cp_sort.sort_id as ssort_id from cp left join cp_sort on  cp.id = cp_sort.cp_id  where cp_sort.sort_id=" + sort_id + " order by cp.px desc,cp.id desc";
+            //}
             var result = DataAccess.DataSet(sqlstr, this.Url.Request.RequestUri.Segments[1]);
 
             result.Tables[0].TableName = "cp";
