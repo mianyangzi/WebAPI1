@@ -10,7 +10,7 @@ namespace WebAPI.Controllers
         // GET api/values
         public DataSet Get()
         {
-            var result = DataAccess.DataSet("select * from cp order by px desc,id desc", this.Url.Request.RequestUri.Segments[1]);
+            var result = DataAccess.DataSet("select cp.*,cp_sort.sort_id as ssort_id from cp left join cp_sort on cp.id=cp_sort.cp_id order by px desc,id desc", this.Url.Request.RequestUri.Segments[1]);
             result.Tables[0].TableName = "cp";
             return result;
         }
